@@ -1,0 +1,8 @@
+{
+    "google": {
+        "authorizationUrl": "https://accounts.google.com/o/oauth2/v2/auth",
+        "redirectUrl": "https://eu-gb.functions.appdomain.cloud/api/v1/web/joshi.4@iitj.ac.in_dev/default/oauth-login-and-redirect",
+        "clientId": "864791225933-gtvmlkfgroq05jutd7f5h6m1reivobpb.apps.googleusercontent.com",
+        "protectedUrl": "https://service.eu.apiconnect.ibmcloud.com/gws/apigateway/api/c7115efe8ac0ed2dd999a14787953e111e55e5d3d54ff6e134e8a7545717adaf/path/action"
+    }
+}

@@ -33,15 +33,10 @@ export class HomeComponent {
       url = url + "&access_type=" + "offline";
       url = url + "&redirect_uri=" + this.redirectUrl;
       window.location.href = url;
+      console.log(url)
     }
   }
 
-  /*
-  curl --request GET \
-  --url https://service.us.apiconnect.ibmcloud.com/gws/apigateway/api/a172f687d4c7fac2da3546903009090a18a9643313d2d6e47ff43dd8ede5fa3a/niklas/action \
-  --header 'accept: application/json' \
-  --header 'authorization: Bearer REPLACE_BEARER_TOKEN'
-  */
 
   onButtonInvokeActionClicked(): void {
     
@@ -51,6 +46,14 @@ export class HomeComponent {
     });
     let options = new RequestOptions({ headers: headers });
 
+    if(this.accessToken){
+      this.http.get("https://baee9c9e.eu-gb.apigw.appdomain.cloud/hello-world/action")
+        .map(res => res.json())
+        .subscribe(result => {
+        this.resultOfProtectedAPI = JSON.stringify(result, null , 2);
+        })
+
+    }else{
     this.http.get(this.protectedUrl, options)
       .map(res => res.json())
       .subscribe(
@@ -59,9 +62,8 @@ export class HomeComponent {
         this.resultOfProtectedAPI = JSON.stringify(result, null, 2);
       },
       err => {
-        console.error(err);
         this.resultOfProtectedAPI = JSON.stringify(err._body, null, 2);
-      });
+      }) };
   }
 
   constructor(
@@ -89,7 +91,9 @@ export class HomeComponent {
     this.expiresIn = this.route.snapshot.queryParams["expires_in"];
     if (this.expiresIn) console.log(this.expiresIn)
     this.userName = this.route.snapshot.queryParams["user_name"];
-    if (this.userName) console.log(this.userName)
+    console.log(this.route.snapshot)
+   // this.userName = "User"
+    console.log(this.userName)
   }
 
 }
